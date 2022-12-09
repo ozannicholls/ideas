@@ -1,23 +1,32 @@
 let particles = [];
+let vx1, vx2, vy1, vy2;
 
 
 function setup() {
     var canvas = createCanvas(window.innerWidth, window.innerHeight);
     canvas.parent("p5container");
 
+    //already used in draw()
     //let p = new Particle();
     //particles.push(p)
 }
 
 function draw() {
-    background(0,15);
+    background(0,25);
+
+    
+    vx1 = random(5, 2)
+    vx2 = random(-5, -2)
+    vy1 = random(5, 2)
+    vy2 = random(-5, -2)
+    
 
     //fill(255, 255, 255);
     //ellipse(400, 400, 200);
     
     //workiing on mapping: x1 & y1
     //var x1 = map(mouseX, 0, window.innerWidth, 0, 5);
-    var y1 = map(mouseY, 0, window.innerHeight, 20, 450)
+    var y1 = map(mouseY, 0, window.innerHeight, 20, 400)
 
 
     for(let j = 0; j < 5; j++){
@@ -30,7 +39,10 @@ function draw() {
             particles[i].show();
         }
         if(particles.length > y1){
-            particles.shift()
+            for(let k = 0; k < 5; k++){
+                particles.shift()
+            }
+            
         }
     }
     console.log(y1)
@@ -43,9 +55,8 @@ class Particle{
     constructor(){
         this.x = width/2;
         this.y = height/2;
-        this.vx = random(3, -3);
-        this.vy = random(2, -2);
-
+        this.vx = random(vx1, vx2);//3, -3
+        this.vy = random(vy1, vy2);//2, -2
     }
 
     update(){
@@ -54,8 +65,17 @@ class Particle{
     }
 
     show(){
-        stroke(255);
+        noStroke()
+
         fill(255, 150);
         ellipse(this.x, this.y, 16);
+
+
+        fill(255, 0, 0, 50);
+        ellipse(this.x - 10, this.y, 16);
+
+
+        fill(0, 0, 255, 50);
+        ellipse(this.x + 10, this.y, 16);
     }
 }
