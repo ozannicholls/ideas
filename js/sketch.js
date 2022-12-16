@@ -1,5 +1,5 @@
 let particles = [];
-let vx1, vx2, vy1, vy2;
+let vx1, vx2, vy1, vy2, d = 1;
 
 
 function setup() {
@@ -57,25 +57,31 @@ class Particle{
         this.y = height/2;
         this.vx = random(vx1, vx2);//3, -3
         this.vy = random(vy1, vy2);//2, -2
+
+        
     }
 
     update(){
         this.x += this.vx
         this.y += this.vy
+        
     }
 
     show(){
         noStroke()
 
+        
+
         fill(255, 150);
-        ellipse(this.x, this.y, 16);
+        ellipse(this.x, this.y, d);
 
-
+        ///*
         fill(255, 0, 0, 50);
-        ellipse(this.x - 10, this.y, 16);
+        ellipse(this.x - d, this.y, d);
 
 
         fill(0, 0, 255, 50);
-        ellipse(this.x + 10, this.y, 16);
+        ellipse(this.x + d, this.y, d);
+        //*/
     }
 }
